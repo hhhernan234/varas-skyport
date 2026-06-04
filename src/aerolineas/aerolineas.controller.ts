@@ -1,4 +1,34 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { AerolineasService } from './aerolineas.service';
+import { CreateAerolineaDto } from './dto/create-aerolinea.dto';
+import { UpdateAerolineaDto } from './dto/update-aerolinea.dto';
 
 @Controller('aerolineas')
-export class AerolineasController {}
+export class AerolineasController {
+  constructor(private readonly aerolineasService: AerolineasService) {}
+
+  @Post()
+  create(@Body() createAerolineaDto: CreateAerolineaDto) {
+    return this.aerolineasService.create(createAerolineaDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.aerolineasService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.aerolineasService.findOne(id);
+  }
+
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateAerolineaDto: UpdateAerolineaDto) {
+    return this.aerolineasService.update(id, updateAerolineaDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.aerolineasService.remove(id);
+  }
+}

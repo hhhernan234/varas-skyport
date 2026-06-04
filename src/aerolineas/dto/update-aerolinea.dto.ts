@@ -6,6 +6,6 @@ export class UpdateAerolineaDto {
   nombre?: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsString()
   codigo?: string;
 }
